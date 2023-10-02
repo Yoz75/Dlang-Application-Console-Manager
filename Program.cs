@@ -7,6 +7,12 @@ namespace DACM
         private static void Main(string[] args)
         {
             string[] directoryFiles;
+            string dmdArguments = string.Empty;
+            for (int i = 0; i < args.Length; i++)
+            {
+                dmdArguments += args[i] += ' ';
+            }
+
             if (Directory.Exists("Source"))
             {
                 directoryFiles = Directory.GetFiles("Source");
@@ -64,7 +70,7 @@ namespace DACM
                 //Создаём и стартуем процесс dmd
                 Process dmd = new Process();
                 dmd.StartInfo.FileName = "dmd";
-                dmd.StartInfo.Arguments = dmdFilesArguments + ' ' + string.Concat<string>(args);
+                dmd.StartInfo.Arguments = dmdFilesArguments + ' ' + dmdArguments;
                 dmd.Start();
                 dmd.Close();
                 Console.WriteLine("All is done!");
